@@ -299,44 +299,6 @@ header .navbar{
 .menu-section .menu-list .menu-item .text{
     font-size: var(--font-size-m);
 }
-
-.carousel-container {
-    width: 100%;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .carousel-images {
-    display: flex;
-    transition: transform 0.3s ease-in-out;
-  }
-
-  .carousel-images img{
-    width: 100%; /* Cada imagen ocupa todo el contenedor */
-    flex-shrink: 0;
-    object-fit: contain;
-    aspect-ratio: 1;
-  }
-  
-  .carousel-button {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    border: none;
-    cursor: pointer;
-    font-size: 18px;
-    padding: 5px;
-    z-index: 1;
-  }
-  
-  .carousel-button.prev {
-    left: 5px;
-  }
-  
-  .carousel-button.next {
-    right: 5px;
-  }
-
   .menu-details {
     margin-top: 15px;
     text-align: center;
