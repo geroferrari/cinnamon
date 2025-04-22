@@ -232,6 +232,7 @@ header .navbar{
           );        pointer-events: none; /* para que no interfiera con clics */
       }
 
+      
 .about-section{
     padding: 120px 0;
     background: var(--ligth-pink-color);
@@ -347,7 +348,7 @@ header .navbar{
   }
   
   .menu-details .description {
-    font-size: var(--font-size-s);
+    font-size: var(--font-size-m);
     color: var(--white-color);
     font-style: italic;
     opacity: 0.8;
