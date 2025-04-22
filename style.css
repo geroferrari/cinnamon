@@ -284,7 +284,7 @@ header .navbar{
 
 .menu-section{
     color: var(--white-color);
-    background-color: var(--dark-color);
+    background-color: var(--primary-color);
     padding: 50px 0 100px;
 }
 
