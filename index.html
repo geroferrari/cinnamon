@@ -10,16 +10,16 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=3">
 </head>
 <body>
   <a class="skip-link" href="#productos">Ir a los productos</a>
   <header class="site-header" id="inicio">
     <nav class="navbar shell" aria-label="Navegación principal">
-      <a href="#inicio" class="brand" aria-label="Cinnamon, inicio"><img src="assets/cinnamon_logo.jpg" alt="" width="58" height="58"><span><strong>Cinnamon</strong><small>Flavours in Chocolate</small></span></a>
+      <a href="#inicio" class="brand" aria-label="Cinnamon, inicio"><img src="assets/sticker_logo.jpg" alt="" width="58" height="58"><span><strong>Cinnamon</strong><small>Flavours in Chocolate</small></span></a>
       <button class="menu-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-links">☰</button>
       <div class="nav-links" id="nav-links"><a href="#inicio">Inicio</a><a href="#nosotros">Nosotros</a><a href="#productos">Productos</a><a href="#galeria">Galería</a></div>
-      <button class="cart-trigger" type="button" aria-label="Abrir carrito, 0 productos"><span aria-hidden="true">🛍</span><span class="cart-label">Mi pedido</span><span class="cart-count">0</span></button>
+      <button class="cart-trigger" type="button" aria-label="Abrir carrito, 0 productos"><span class="bag-icon" aria-hidden="true"></span><span class="cart-label">Mi pedido</span><span class="cart-count">0</span></button>
     </nav>
   </header>
   <main>
@@ -37,10 +37,13 @@
     <section class="gallery" id="galeria"><div class="shell"><div class="section-heading centered"><p class="eyebrow">Un poquito de Cinnamon</p><h2>Hecho para tentar</h2></div><div class="gallery-grid"><img src="assets/galeria1.jpg" alt="Bombones Cinnamon decorados" loading="lazy"><img src="assets/caja_bombones_galeria.jpeg" alt="Caja de bombones artesanales" loading="lazy"><img src="assets/tabletas_galeria.jpeg" alt="Tabletas de chocolate Cinnamon" loading="lazy"><img src="assets/galeria5.jpg" alt="Detalle de chocolates artesanales" loading="lazy"><img src="assets/galeria_huevo.jpeg" alt="Huevo de chocolate artesanal" loading="lazy"></div></div></section>
     <section class="custom-order"><div class="shell custom-card"><div><p class="eyebrow">Eventos y regalos</p><h2>¿Tenés una idea especial?</h2><p>Armamos propuestas personalizadas para que tu celebración tenga su momento más dulce.</p></div><a class="button light" href="https://wa.me/5493489452943?text=Hola%20Cinnamon%2C%20quiero%20consultar%20por%20un%20pedido%20especial" target="_blank" rel="noopener">Contanos tu idea <span aria-hidden="true">→</span></a></div></section>
   </main>
-  <footer><div class="shell footer-grid"><div class="footer-brand"><strong>Cinnamon</strong><span>Flavours in Chocolate</span></div><p>Chocolates artesanales hechos con amor.</p><div class="footer-links"><a href="https://www.instagram.com/cinnamon.chocolates/" target="_blank" rel="noopener">Instagram</a><a href="https://wa.me/5493489452943" target="_blank" rel="noopener">WhatsApp</a></div></div></footer>
+  <footer>
+    <div class="shell footer-grid"><div class="footer-brand"><strong>Cinnamon</strong><span>Flavours in Chocolate</span></div><p>Chocolates artesanales hechos con amor.</p><div class="footer-links"><a href="https://www.instagram.com/cinnamon.chocolates/" target="_blank" rel="noopener">Instagram</a><a href="https://wa.me/5493489452943" target="_blank" rel="noopener">WhatsApp</a></div></div>
+    <div class="shell footer-bottom"><span>© <span id="current-year"></span> Cinnamon Chocolates</span><a class="powered-by" href="https://guris3.com.ar" target="_blank" rel="noopener">Powered by <img src="assets/guris3.webp" alt="GURIS3" width="330" height="40" loading="lazy"></a></div>
+  </footer>
   <div class="overlay" hidden></div>
   <aside class="cart-drawer" aria-hidden="true" aria-labelledby="cart-title"><div class="cart-header"><div><p class="eyebrow">Tu selección</p><h2 id="cart-title">Mi pedido</h2></div><button class="icon-button cart-close" type="button" aria-label="Cerrar carrito">×</button></div><div class="cart-content"><div class="empty-cart"><span>🍫</span><h3>Tu carrito está vacío</h3><p>Sumá algunos chocolates y prepará algo rico.</p><button class="button primary keep-shopping" type="button">Ver productos</button></div><div class="cart-items"></div></div><div class="cart-footer" hidden><div class="cart-summary"><span>Productos</span><strong class="cart-total-items">0 unidades</strong></div><p class="price-note">El precio y la disponibilidad se confirman al recibir tu pedido.</p><button class="button primary checkout-button" type="button">Continuar pedido <span aria-hidden="true">→</span></button></div></aside>
   <dialog class="checkout-dialog" aria-labelledby="checkout-title"><button class="icon-button dialog-close" type="button" aria-label="Cerrar">×</button><div class="dialog-intro"><p class="eyebrow">Último paso</p><h2 id="checkout-title">Completá tus datos</h2><p>Los usaremos para preparar el mensaje de tu pedido.</p></div><form id="checkout-form"><label>Nombre <span>*</span><input type="text" name="name" autocomplete="name" required placeholder="¿Cómo te llamás?"></label><label>Modalidad <span>*</span><select name="delivery" required><option value="" selected disabled>Elegí una opción</option><option>Retiro a coordinar</option><option>Envío a domicilio</option></select></label><label>Notas del pedido <textarea name="notes" rows="3" placeholder="Sabores, fecha, dirección u otra indicación"></textarea></label><p class="form-hint">Al continuar se abrirá WhatsApp con el detalle listo para enviar.</p><button class="button whatsapp" type="submit">Enviar pedido por WhatsApp</button></form></dialog>
-  <div class="toast" role="status" aria-live="polite"></div><script src="script.js"></script>
+  <div class="toast" role="status" aria-live="polite"></div><script src="script.js?v=3"></script>
 </body>
 </html>

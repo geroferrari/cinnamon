@@ -12,7 +12,14 @@ const PRODUCTS = [
   { id:'marroc',name:'Chocolates Marroc',category:'especiales',image:'assets/marroc.png',description:'Capas de chocolate y maní inspiradas en un clásico.',options:['Caja de 100 g','Caja de 250 g'] },
   { id:'bonobon',name:'Bombones de Bon o Bon',category:'bombones',image:'assets/bon_o_bon.png',description:'Cremosos, crocantes y perfectos para compartir.',options:['Caja de 100 g','Caja de 250 g'] }
 ];
-const state={cart:JSON.parse(localStorage.getItem('cinnamon-cart')||'[]'),filter:'todos'};
+function loadCart(){
+  try{
+    const saved=JSON.parse(localStorage.getItem('cinnamon-cart')||'[]');
+    if(!Array.isArray(saved))return [];
+    return saved.filter(item=>PRODUCTS.some(product=>product.id===item.id)&&typeof item.option==='string'&&Number.isFinite(item.quantity)&&item.quantity>0);
+  }catch(error){return []}
+}
+const state={cart:loadCart(),filter:'todos'};
 const $=(selector,parent=document)=>parent.querySelector(selector);
 const $$=(selector,parent=document)=>[...parent.querySelectorAll(selector)];
 const productGrid=$('#product-grid'),drawer=$('.cart-drawer'),overlay=$('.overlay'),dialog=$('.checkout-dialog');
@@ -22,7 +29,7 @@ function renderProducts(){
   productGrid.innerHTML=visible.map(product=>`<article class="product-card"><div class="product-image"><img src="${product.image}" alt="${product.name}" loading="lazy"><span class="product-tag">${product.category}</span></div><div class="product-info"><h3>${product.name}</h3><p>${product.description}</p><div class="product-controls"><label for="option-${product.id}">Presentación</label><select id="option-${product.id}">${product.options.map(option=>`<option>${option}</option>`).join('')}</select><button class="add-to-cart" type="button" data-id="${product.id}">Agregar al pedido</button></div></div></article>`).join('');
 }
 function saveAndRenderCart(){
-  localStorage.setItem('cinnamon-cart',JSON.stringify(state.cart));
+  try{localStorage.setItem('cinnamon-cart',JSON.stringify(state.cart))}catch(error){}
   const count=state.cart.reduce((total,item)=>total+item.quantity,0);
   $('.cart-count').textContent=count;
   $('.cart-trigger').setAttribute('aria-label',`Abrir carrito, ${count} ${count===1?'producto':'productos'}`);
@@ -41,4 +48,5 @@ $('.cart-items').addEventListener('click',event=>{const action=event.target.data
 $('.cart-trigger').addEventListener('click',openCart);$('.cart-close').addEventListener('click',closeCart);$('.keep-shopping').addEventListener('click',()=>{closeCart();$('#productos').scrollIntoView()});overlay.addEventListener('click',closeCart);$('.checkout-button').addEventListener('click',()=>{closeCart();dialog.showModal()});$('.dialog-close').addEventListener('click',()=>dialog.close());dialog.addEventListener('click',event=>{if(event.target===dialog)dialog.close()});
 $('#checkout-form').addEventListener('submit',event=>{event.preventDefault();const data=new FormData(event.currentTarget);const lines=state.cart.map(item=>{const product=PRODUCTS.find(entry=>entry.id===item.id);return `• ${item.quantity} x ${product.name} (${item.option})`});const message=[`Hola Cinnamon, soy ${data.get('name')} y quiero hacer este pedido:`,'',...lines,'',`Modalidad: ${data.get('delivery')}`,data.get('notes')?`Notas: ${data.get('notes')}`:'','','¿Me confirman disponibilidad y precio?'].join('\n');window.open(`https://wa.me/5493489452943?text=${encodeURIComponent(message)}`,'_blank','noopener');dialog.close()});
 const menuToggle=$('.menu-toggle');menuToggle.addEventListener('click',()=>{const open=$('.nav-links').classList.toggle('open');menuToggle.setAttribute('aria-expanded',open);menuToggle.textContent=open?'×':'☰'});$$('.nav-links a').forEach(link=>link.addEventListener('click',()=>{$('.nav-links').classList.remove('open');menuToggle.setAttribute('aria-expanded','false');menuToggle.textContent='☰'}));document.addEventListener('keydown',event=>{if(event.key==='Escape'&&drawer.classList.contains('open'))closeCart()});
+$('#current-year').textContent=new Date().getFullYear();
 renderProducts();saveAndRenderCart();
